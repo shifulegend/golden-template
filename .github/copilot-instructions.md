@@ -34,5 +34,8 @@ You MUST proactively update these files every session without waiting for user p
 - `.github/instructions/*.instructions.md` — when scoped rules change
 - `.github/prompts/*.prompt.md` — when workflows improve
 
+## Context & Token Efficiency
+Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
+
 ## Canonical Source
 All rules originate in `docs/ai/`. If this file conflicts with `docs/ai/`, the shared docs win.
