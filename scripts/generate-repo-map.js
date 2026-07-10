@@ -69,7 +69,7 @@ function generate() {
     const symbols = extractSymbols(file);
     if (symbols.length === 0) continue;
     lines.push(`## ${rel}`);
-    lines.push(symbols.map(s => `- \`${s}\``).join('\n'));
+    for (const s of symbols) lines.push(`- \`${s}\``);
     lines.push('');
   }
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
