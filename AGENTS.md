@@ -19,6 +19,9 @@
 - Granular commits: what + why
 - Verify: lint → typecheck → test → build
 
+## Context & Token Efficiency
+Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
+
 ## Dynamic Update Requirement
 ALL of the following are dynamic files — update proactively every session:
 - `docs/ai/mistakes.md`, `docs/ai/decision-log.md`, `docs/ai/change-trace.md`
