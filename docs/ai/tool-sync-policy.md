@@ -26,3 +26,6 @@
 ## Conflict Resolution
 If a conflict exists between a tool-specific file and `docs/ai/`, the shared doc wins.
 Update the tool-specific file to match, and log the correction in `docs/ai/change-trace.md`.
+
+## Context & Token Efficiency
+`docs/ai/context-efficiency.md` defines token-minimization rules: structural code search (ripgrep/ast-grep over speculative file reads), a maintained `docs/ai/repo-map.md` for instant orientation, tool/log output compression before it enters context, and static-first prompt ordering for cache efficiency. All tool entrypoints reference this file rather than restating it — see `.github/copilot-instructions.md`, `CLAUDE.md`, `gemini/GEMINI.md`, `AGENTS.md`.
