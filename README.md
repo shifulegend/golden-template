@@ -17,6 +17,7 @@ A cross-tool AI development template for starting any new repository with a docu
 | `tool-sync-policy.md` | How tool-specific files stay in sync |
 | `architecture.md` | System architecture, components, integrations |
 | `testing-strategy.md` | Test types, coverage targets, regression policy |
+| `context-efficiency.md` | Token-minimization: structural code search, repo-map, output compression, prompt-cache ordering |
 
 ### GitHub Copilot (`.github/`)
 - `copilot-instructions.md` — repo-wide instructions
