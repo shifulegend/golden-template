@@ -9,3 +9,4 @@
 - Update `docs/ai/change-trace.md` after each meaningful sub-step.
 - Newest entries first in all log files.
 - Never defer documentation — write it as soon as the information is known.
+- When creating or changing `README.md`, follow `docs/ai/readme-guidance.md` (start from `docs/README.template.md`) and run its checklist before committing.

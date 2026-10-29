@@ -34,6 +34,9 @@ Proactively update these files every session without waiting for user prompts:
 - `gemini/GEMINI.md` and `AGENTS.md` — when repo-wide rules change
 - `.agents/rules/*.md` — when scoped rules change
 
+## README Standard
+Follow `docs/ai/readme-guidance.md` whenever `README.md` is created or changed: inverted-pyramid order (one-line pitch, badges and hero visual first; quickstart; install; configuration; deep dive), the archetype table, accessibility rules, and the pre-commit checklist. Start new READMEs from `docs/README.template.md`.
+
 ## Context & Token Efficiency
 Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
 
