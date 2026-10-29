@@ -18,6 +18,7 @@ A cross-tool AI development template for starting any new repository with a docu
 | `architecture.md` | System architecture, components, integrations |
 | `testing-strategy.md` | Test types, coverage targets, regression policy |
 | `context-efficiency.md` | Token-minimization: structural code search, repo-map, output compression, prompt-cache ordering |
+| `readme-guidance.md` | README standard: 5-second filter, anatomy, archetypes, accessibility, pre-commit checklist |
 
 ### GitHub Copilot (`.github/`)
 - `copilot-instructions.md` — repo-wide instructions
@@ -36,7 +37,7 @@ A cross-tool AI development template for starting any new repository with a docu
 - `.agents/workflows/` — reusable workflows (start-session, review-verify, update-memory)
 
 ### Security & Dependencies
-- `.github/workflows/ci.yml` — CI: lint, typecheck, test, build
+- `.github/workflows/ci.yml` — CI: lint, typecheck, test, build (stub steps pass until you replace them; keep any `run:` value containing `: ` in quotes)
 - `.github/dependabot.yml` — automated dependency updates
 - `CODEOWNERS` — auto-assign reviewers per path
 
@@ -47,6 +48,7 @@ A cross-tool AI development template for starting any new repository with a docu
 - `CITATION.cff` — GitHub-native citation support
 - `docs/SETUP.md` — first-time setup guide
 - `docs/BRANCHES.md` — branch strategy and protection rules
+- `docs/README.template.md` — README skeleton that follows `docs/ai/readme-guidance.md`
 
 ## How to Use
 
@@ -62,8 +64,9 @@ A cross-tool AI development template for starting any new repository with a docu
 4. Update `docs/SETUP.md` — actual commands for your stack
 5. Uncomment the right `dependabot.yml` ecosystem block
 6. Enable branch protection rules (Settings → Branches)
-7. Search for `TODO` markers and fill them in
-8. Run your first AI session using the `start-session` prompt/skill/workflow
+7. Rewrite `README.md` for your project: copy `docs/README.template.md` over it, fill it in following `docs/ai/readme-guidance.md`, and run its checklist
+8. Search for `TODO` markers and fill them in
+9. Run your first AI session using the `start-session` prompt/skill/workflow
 
 ## Core Principles
 - **Extremely modular** — smallest sensible unit, explicit interfaces

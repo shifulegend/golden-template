@@ -14,6 +14,13 @@
 
 ---
 
+### [2026-10-30 IST] — Fix CI YAML and embed the README standard
+- **What Changed**: Quoted the CI stub `run:` values (the workflow was invalid YAML). Added `docs/ai/readme-guidance.md` and `docs/README.template.md`; added README Standard pointers to `CLAUDE.md`, `AGENTS.md`, `gemini/GEMINI.md`, `.github/copilot-instructions.md`, and a bullet to each docs rule file; updated `tool-sync-policy.md` and the template README.
+- **Why**: CI failed on every push for this template and its children; owner asked to embed the readme-guidance playbook.
+- **Affected Areas**: CI, docs/ai, tool adapters, README
+- **Related Commit**: see `git log`
+- **Risks / Follow-ups**: Repos already created from the template keep the broken CI until patched (diagram-explainer-videos already fixed).
+
 ### [2026-07-11 03:05 IST] — Token minimization rules embedded (search, repo-map, compression, caching)
 - **What Changed**: Added `docs/ai/context-efficiency.md` as a new, purely additive canonical
   file defining four token-minimization practices: (1) structural code search via ripgrep first,
