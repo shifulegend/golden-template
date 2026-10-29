@@ -1,5 +1,6 @@
 # CI workflow — lint, typecheck, test, build
 # Customize the steps for your stack. Stubs are marked with TODO.
+# Quote any run: value containing ": " (a colon then a space), or YAML rejects the whole file.
 # Best practice: pin actions to full SHAs for supply-chain security.
 # Docs: https://docs.github.com/en/actions
 
@@ -35,20 +36,20 @@ jobs:
 
       # ── Install dependencies ───────────────────────────────────────────────
       - name: Install dependencies
-        run: echo "TODO: npm ci | pip install -r requirements.txt | go mod download"
+        run: 'echo "TODO: npm ci | pip install -r requirements.txt | go mod download"'
 
       # ── Lint ───────────────────────────────────────────────────────────────
       - name: Lint
-        run: echo "TODO: npm run lint | ruff check . | golangci-lint run"
+        run: 'echo "TODO: npm run lint | ruff check . | golangci-lint run"'
 
       # ── Typecheck ──────────────────────────────────────────────────────────
       - name: Typecheck
-        run: echo "TODO: npm run typecheck | mypy . | go vet ./..."
+        run: 'echo "TODO: npm run typecheck | mypy . | go vet ./..."'
 
       # ── Test ───────────────────────────────────────────────────────────────
       - name: Test
-        run: echo "TODO: npm test | pytest | go test ./..."
+        run: 'echo "TODO: npm test | pytest | go test ./..."'
 
       # ── Build ──────────────────────────────────────────────────────────────
       - name: Build
-        run: echo "TODO: npm run build | python -m build | go build ./..."
+        run: 'echo "TODO: npm run build | python -m build | go build ./..."'
