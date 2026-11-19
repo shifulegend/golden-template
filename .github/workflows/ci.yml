@@ -34,9 +34,12 @@ jobs:
           python-version: "3.12"
 
       - name: Run deterministic hygiene gates (repo + PR diff ratchets)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            python3 scripts/check_hygiene_gates.py --diff-base "origin/${{ github.base_ref }}"
+          if [ "$EVENT_NAME" = "pull_request" ] && [ -n "$BASE_REF" ]; then
+            python3 scripts/check_hygiene_gates.py --diff-base "origin/$BASE_REF"
           else
             python3 scripts/check_hygiene_gates.py
           fi
