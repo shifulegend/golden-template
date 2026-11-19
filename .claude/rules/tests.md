@@ -1,10 +1,14 @@
-# Test Rules
-<!-- DYNAMIC FILE -->
-<!-- paths: **/*.test.*, **/*.spec.*, tests/**, test/** -->
+---
+paths:
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "tests/**"
+  - "test/**"
+---
+# Testing & TDD Rules
 
-- Every feature or fix must have a test.
-- Tests must be modular — one test per behavior.
-- Name tests descriptively: what is tested + expected outcome.
-- Regressions must be logged in `docs/ai/mistakes.md`.
-- Tests must pass before any commit is proposed.
-- Never skip failing tests without logging the reason.
+- Follow TDD-first: write failing contract/unit tests (including edge/adversarial cases) before implementing.
+- Never weaken, skip, or delete existing assertions to make tests pass.
+- One test per behavior with descriptive names stating input + expected outcome; 0% tolerated flake rate.
+- Every bug fix ships with a regression test and a `docs/ai/mistakes.md` entry.
+- Verify log-redaction and schema-validation boundaries in unit tests.

@@ -1,81 +1,34 @@
 # Golden Template — shifulegend
 
-A cross-tool AI development template for starting any new repository with a documentation-first, modular, verification-first, security-first workflow.
+A cross-tool AI development template embedding the **59-control Code Hygiene & Vibe Engineering Standard**, deterministic SHA-pinned CI/CD security gates, and official canonical instruction architectures for **Anthropic Claude Code**, **Google Antigravity**, and **GitHub Copilot**.
 
 ## What's Included
 
-### Shared Canonical Memory (`docs/ai/`)
-| File | Purpose |
-|------|---------|
-| `project-overview.md` | Project purpose, stack, architecture |
-| `engineering-rules.md` | Modularity, zero-hardcoding, verification rules |
-| `mistakes.md` | Central mistake log — read first every session |
-| `decision-log.md` | Timestamped decisions |
-| `change-trace.md` | Notable changes per sub-step |
-| `session-start-checklist.md` | Mandatory startup checklist |
-| `commit-log-guidance.md` | Commit message standards |
-| `tool-sync-policy.md` | How tool-specific files stay in sync |
-| `architecture.md` | System architecture, components, integrations |
-| `testing-strategy.md` | Test types, coverage targets, regression policy |
-| `context-efficiency.md` | Token-minimization: structural code search, repo-map, output compression, prompt-cache ordering |
-| `readme-guidance.md` | README standard: 5-second filter, anatomy, archetypes, accessibility, pre-commit checklist |
+### 1. Deterministic CI, Security & Supply-Chain Gates (Controls 1–6)
+- `.github/workflows/ci.yml` — 100% SHA-pinned CI running `scripts/check_hygiene_gates.py` (repo + PR diff ratchets) and stack lint/typecheck/test/build gates.
+- `.github/workflows/security-hygiene.yml` — SHA-pinned full-history Gitleaks secret scan + SAST/SCA/SBOM activation stubs.
+- `scripts/check_hygiene_gates.py` — Zero-dependency validator enforcing 40-char SHA pinning, `.env`/`.gitignore` parity, YAML/JSON validity, MD040 code fence tags, suppression justification, >500 LOC append guard, `CODEOWNERS`, and official Claude/Antigravity canonical doc specs.
+- `.pre-commit-config.yaml`, `.editorconfig`, `.markdownlint.json`, `SECURITY.md`, `.github/dependabot.yml`, `.github/PULL_REQUEST_TEMPLATE.md`, and `CODEOWNERS`.
 
-### GitHub Copilot (`.github/`)
-- `copilot-instructions.md` — repo-wide instructions
-- `instructions/*.instructions.md` — scoped instructions (core, docs, tests, config)
-- `prompts/*.prompt.md` — reusable prompts (start-session, plan, implement, review, debug, memory)
+### 2. Official Canonical AI Instructions (21 Semantic Hygiene Controls)
+- **Cross-Tool Canonical Root:** `AGENTS.md` (<200 lines) + `docs/ai/**` (`engineering-rules.md`, `code-hygiene-controls.md`, `tool-sync-policy.md`, `context-efficiency.md`, `readme-guidance.md`, logs).
+- **Anthropic Claude Code:** `CLAUDE.md` (imports `@AGENTS.md`), `.claude/settings.json` (deterministic `permissions.deny` + hooks), `.claude/rules/*.md` (YAML `paths:` frontmatter), `.claude/skills/*/SKILL.md` (YAML frontmatter), and read-only `.claude/agents/hygiene-reviewer.md`.
+- **Google Antigravity:** Workspace-root `GEMINI.md` (+ `gemini/GEMINI.md` mirror), `.agents/hooks.json` (`PreToolUse` gates), `.agents/rules/*.md` (YAML `trigger:` frontmatter), `.agents/skills/*/SKILL.md` (migrated from legacy workflows), and read-only `.agents/agents/hygiene-reviewer.md`.
+- **GitHub Copilot:** `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `.github/prompts/*.prompt.md`.
 
-### Claude Code (`CLAUDE.md` + `.claude/`)
-- `CLAUDE.md` — project memory entrypoint
-- `.claude/rules/` — modular scoped rules (core, docs, tests, config)
-- `.claude/skills/` — reusable skills (session-start, project-memory, review-verify, implement)
+## Quickstart
+```bash
+cp .env.example .env
+pre-commit install
+python3 scripts/check_hygiene_gates.py
+```
 
-### Google Antigravity (`gemini/` + `.agents/`)
-- `gemini/GEMINI.md` — global Antigravity rules
-- `AGENTS.md` — cross-tool portability layer
-- `.agents/rules/` — scoped rules (core, docs, tests, config)
-- `.agents/workflows/` — reusable workflows (start-session, review-verify, update-memory)
+## After Creating a New Repo from This Template
+1. Update `docs/ai/project-overview.md`, `docs/ai/architecture.md`, and `docs/SETUP.md`.
+2. Replace the stack stubs in `.github/workflows/ci.yml` (keeping all GitHub Actions pinned to full 40-char commit SHAs).
+3. Uncomment your ecosystem in `.github/dependabot.yml` and enable branch protection per `docs/BRANCHES.md`.
+4. Copy `docs/README.template.md` over `README.md` following `docs/ai/readme-guidance.md`.
+5. Start your first AI session with `/session-start`.
 
-### Security & Dependencies
-- `.github/workflows/ci.yml` — CI: lint, typecheck, test, build (stub steps pass until you replace them; keep any `run:` value containing `: ` in quotes)
-- `.github/dependabot.yml` — automated dependency updates
-- `CODEOWNERS` — auto-assign reviewers per path
-
-### Developer Experience
-- `LICENSE` — MIT
-- `.gitignore` — comprehensive multi-stack gitignore
-- `.env.example` — safe env template (never commit `.env`)
-- `CITATION.cff` — GitHub-native citation support
-- `docs/SETUP.md` — first-time setup guide
-- `docs/BRANCHES.md` — branch strategy and protection rules
-- `docs/README.template.md` — README skeleton that follows `docs/ai/readme-guidance.md`
-
-## How to Use
-
-### Create a New Repo from This Template
-1. Go to [github.com/shifulegend/golden-template](https://github.com/shifulegend/golden-template)
-2. Click **Use this template** → **Create a new repository**
-3. Fill in the new repo details and create
-
-### After Creating from Template
-1. `cp .env.example .env` and fill in real values
-2. Update `docs/ai/project-overview.md` — purpose, stack, architecture
-3. Update `docs/ai/architecture.md` — components, data flow, integrations
-4. Update `docs/SETUP.md` — actual commands for your stack
-5. Uncomment the right `dependabot.yml` ecosystem block
-6. Enable branch protection rules (Settings → Branches)
-7. Rewrite `README.md` for your project: copy `docs/README.template.md` over it, fill it in following `docs/ai/readme-guidance.md`, and run its checklist
-8. Search for `TODO` markers and fill them in
-9. Run your first AI session using the `start-session` prompt/skill/workflow
-
-## Core Principles
-- **Extremely modular** — smallest sensible unit, explicit interfaces
-- **Zero hard-coding** — config files, env vars, schemas, or databases for all behavior
-- **Documentation-first** — docs updated proactively every session by AI agents
-- **Mistake-first sessions** — always read mistake log before coding
-- **Granular commits** — one small, reviewable sub-step per commit
-- **Security-first** — CODEOWNERS, Dependabot, CodeQL, secret scanning, .env.example
-- **Cross-tool portable** — Claude Code, GitHub Copilot, and Google Antigravity all supported
-
-## AI Agent Dynamic Update Rule
-All `docs/ai/` files and tool adapter files are **dynamic**. Any AI agent working in a repo created from this template must proactively update them every session — without waiting for explicit user prompts. See `docs/ai/tool-sync-policy.md`.
+## License
+MIT — see [LICENSE](LICENSE).

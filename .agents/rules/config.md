@@ -1,9 +1,11 @@
+---
+trigger: glob
+globs: "config/**, *.config.*, .env*, schemas/**, settings/**"
+description: 12-Factor configuration, secrets protection, and strict schema validation
+---
 # Config & Settings Rules
-<!-- DYNAMIC FILE -->
 
-- Zero hard-coded values anywhere.
-- Environment-specific values in env vars or config files.
-- Safe, documented defaults for all configs.
-- Config schemas validated at startup.
-- New config keys documented in relevant config files and engineering rules.
-- Feature flags must be config-driven.
+- Zero hard-coded values or secrets anywhere; externalize via env vars or secret managers.
+- Only `.env.example` may be committed; never read or write real `.env` files.
+- Validate all config and external API payloads against strict schemas (Zod/Pydantic/JSON Schema).
+- Enforce explicit timeouts and bounded retries on all outbound HTTP/DB clients.

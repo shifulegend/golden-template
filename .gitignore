@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────────────
-# .gitignore — Golden Template defaults
+# .gitignore — Golden Template defaults (12-Factor & Secrets)
 # Extend this file per project stack.
 # NEVER commit secrets, credentials, local config, or build artifacts.
 # ──────────────────────────────────────────────────────────
@@ -16,6 +16,13 @@
 *credentials*
 secrets/
 .secrets/
+
+# Local personal AI instruction & settings overrides (never commit)
+CLAUDE.local.md
+GEMINI.local.md
+*.local.md
+.claude/settings.local.json
+.agents/settings.local.json
 
 # OS & editor cruft
 .DS_Store
@@ -48,8 +55,6 @@ __pycache__/
 .venv/
 venv/
 env/
-dist/
-build/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -79,9 +84,5 @@ coverage/
 .coverage
 lcov.info
 
-# Lock files — commit these, do NOT ignore them
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
-# Pipfile.lock
-# go.sum
+# Lock files — ALWAYS commit these for supply-chain pinning (OWASP A03:2025)
+# package-lock.json | yarn.lock | pnpm-lock.yaml | uv.lock | poetry.lock | go.sum

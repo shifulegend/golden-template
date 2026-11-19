@@ -3,7 +3,7 @@
 <!-- Newest entries first. Read this FIRST at the start of every session. -->
 
 ## Entry Template
-```
+```markdown
 ### [TIMESTAMP] — <Short Title>
 - **Summary**: What went wrong
 - **Root Cause**: Why it happened

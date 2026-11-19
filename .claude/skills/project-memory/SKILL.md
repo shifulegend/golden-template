@@ -1,11 +1,11 @@
-# Skill: Project Memory Update
-<!-- DYNAMIC FILE -->
+---
+name: project-memory
+description: Synchronize durable lessons, mistakes, decisions, and rule updates across docs/ai/ and all tool adapters.
+---
+# Project Memory Update
 
-Purpose: Update all relevant memory and instruction files after any task that produced a durable lesson.
-
-Steps:
-1. Identify the lesson: mistake, decision, rule, or workflow improvement.
-2. Update shared docs first (`docs/ai/`).
-3. Synchronize `CLAUDE.md` and `.claude/rules/*.md`.
-4. Synchronize other tool adapter files per `docs/ai/tool-sync-policy.md`.
-5. Propose commit with message type `ai(memory): ...`
+1. Classify the lesson: mistake, architectural decision, repo-wide rule, or scoped rule.
+2. Update `docs/ai/` first (`mistakes.md`, `decision-log.md`, `engineering-rules.md`, `change-trace.md`).
+3. Sync `AGENTS.md` (<200 lines) and tool adapters per `docs/ai/tool-sync-policy.md`.
+4. Run `python3 scripts/check_hygiene_gates.py` to verify all frontmatter and sync gates pass.
+5. Propose commit: `ai(memory): ...`

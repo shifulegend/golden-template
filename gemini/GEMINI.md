@@ -1,44 +1,6 @@
-# Google Antigravity — Global Rules
-<!-- DYNAMIC FILE — updated automatically by Antigravity as durable lessons emerge -->
-<!-- Last updated: TIMESTAMP -->
+# Google Antigravity — Legacy Mirror Pointer
+<!-- Last updated: 2026-11-19 IST -->
+<!-- Kept for backward compatibility; canonical workspace entrypoint is root GEMINI.md + AGENTS.md -->
 
-## Session Start (Mandatory)
-Before planning or coding in any session:
-1. Read `docs/ai/project-overview.md`
-2. Read `docs/ai/engineering-rules.md`
-3. Read `docs/ai/mistakes.md` — summarize relevant recent mistakes
-4. Read `docs/ai/decision-log.md` — summarize relevant recent decisions
-5. Read relevant `.agents/rules/*.md` for the area being changed
-6. State assumptions, open risks, and relevant rules before any action
-
-## Project Context
-<!-- Summarized from docs/ai/project-overview.md — keep in sync -->
-- **Purpose**: TODO
-- **Stack**: TODO
-- **Architecture**: TODO
-- **Key directories**: TODO
-
-## Core Rules
-- Smallest sensible modular unit per responsibility
-- Zero hard-coding — all behavior configurable
-- Documentation mandatory and timestamped
-- Granular commits: what + why
-- Verify: lint → typecheck → test → build
-- See `.agents/rules/` for detailed scoped rules
-
-## Dynamic Update Requirement
-Proactively update these files every session without waiting for user prompts:
-- `docs/ai/mistakes.md` — on any mistake
-- `docs/ai/decision-log.md` — on any durable decision
-- `docs/ai/change-trace.md` — after each sub-step
-- `gemini/GEMINI.md` and `AGENTS.md` — when repo-wide rules change
-- `.agents/rules/*.md` — when scoped rules change
-
-## README Standard
-Follow `docs/ai/readme-guidance.md` whenever `README.md` is created or changed: inverted-pyramid order (one-line pitch, badges and hero visual first; quickstart; install; configuration; deep dive), the archetype table, accessibility rules, and the pre-commit checklist. Start new READMEs from `docs/README.template.md`.
-
-## Context & Token Efficiency
-Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
-
-## Canonical Source
-All rules originate in `docs/ai/`. If this file conflicts with `docs/ai/`, the shared docs win.
+See workspace-root `GEMINI.md`, `AGENTS.md`, and `docs/ai/engineering-rules.md`.
+All active Antigravity rules, skills, subagents, and hooks live in `.agents/`.

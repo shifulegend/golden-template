@@ -3,7 +3,7 @@
 <!-- Newest entries first -->
 
 ## Entry Template
-```
+```markdown
 ### [TIMESTAMP] — <Change Title>
 - **What Changed**: 
 - **Why**: 
@@ -13,6 +13,13 @@
 ```
 
 ---
+
+### [2026-11-19 IST] — Remediate 59 Code Hygiene Controls & Official Claude/Antigravity Canonical Docs
+- **What Changed**: Added `scripts/check_hygiene_gates.py`, `.github/workflows/security-hygiene.yml`, `.pre-commit-config.yaml`, `.editorconfig`, `.markdownlint.json`, `SECURITY.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `docs/ai/code-hygiene-controls.md`, root `GEMINI.md`, `.claude/settings.json`, `.claude/agents/hygiene-reviewer.md`, `.agents/hooks.json`, `.agents/agents/hygiene-reviewer.md`, `.agents/rules/security-hygiene.md`, and `.agents/skills/*/SKILL.md`. Fixed SHA pinning in `.github/workflows/ci.yml`, YAML frontmatter in `.claude/rules/*.md`, `.claude/skills/*/SKILL.md`, and `.agents/rules/*.md`, error/encoding handling in `scripts/generate-repo-map.js`, `CODEOWNERS`, `.gitignore`, and untagged Markdown code fences.
+- **Why**: Align golden template with all 59 Code Hygiene controls and official Anthropic Claude Code & Google Antigravity canonical document standards.
+- **Affected Areas**: CI/CD, security, root configs, `docs/ai/`, `.claude/`, `.agents/`, `.github/`, `scripts/`.
+- **Related Commit**: see `git log`
+- **Risks / Follow-ups**: Legacy `.agents/workflows/*.md` replaced by `.agents/skills/*/SKILL.md` per official Antigravity migration guide.
 
 ### [2026-10-30 IST] — Fix CI YAML and embed the README standard
 - **What Changed**: Quoted the CI stub `run:` values (the workflow was invalid YAML). Added `docs/ai/readme-guidance.md` and `docs/README.template.md`; added README Standard pointers to `CLAUDE.md`, `AGENTS.md`, `gemini/GEMINI.md`, `.github/copilot-instructions.md`, and a bullet to each docs rule file; updated `tool-sync-policy.md` and the template README.

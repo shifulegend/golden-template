@@ -7,7 +7,7 @@
 - Commit message must explain both WHAT changed and WHY.
 
 ## Format
-```
+```text
 <type>(<scope>): <short imperative summary>
 
 <body: what changed and why, assumptions made, risks noted>
@@ -28,7 +28,7 @@ Refs: #<issue> (if applicable)
 | `ai`       | AI instruction/memory file updates |
 
 ## Examples
-```
+```text
 feat(auth): add token refresh on 401 response
 
 Tokens were expiring mid-session with no recovery. Added interceptor
@@ -37,7 +37,7 @@ that attempts one silent refresh before propagating the error.
 Refs: #42
 ```
 
-```
+```text
 ai(memory): update mistakes.md with null-config assumption error
 
 Identified that agent assumed config always exists. Added prevention
