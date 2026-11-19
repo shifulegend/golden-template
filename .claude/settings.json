@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -c \"import json,sys; cmd=json.load(sys.stdin).get('tool_input',{}).get('command',''); sys.exit(2 if 'git push' in cmd else 0)\" || python3 scripts/check_hygiene_gates.py"
+            "command": "python3 -c \"import json,re,subprocess,sys; cmd=json.load(sys.stdin).get('tool_input',{}).get('command',''); sys.exit(2 if re.search(r'\\bgit\\s+push\\b', cmd) and subprocess.run(['python3', 'scripts/check_hygiene_gates.py']).returncode != 0 else 0)\""
           }
         ]
       }
