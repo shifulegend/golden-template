@@ -147,11 +147,11 @@ def check_env_and_gitignore(errors: list[str]) -> None:
         if required not in gi_lines:
             errors.append(f"[12-FACTOR] .gitignore missing required entry: {required}")
 
-     try:
-        tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
-        env_paths = [ROOT / p for p in tracked if Path(p).name.startswith(".env")]
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        env_paths = [p for p in ROOT.rglob(".env*") if ".git" not in p.parts]
+    try:
+       tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
+       env_paths = [ROOT / p for p in tracked if Path(p).name.startswith(".env")]
+   except (subprocess.CalledProcessError, FileNotFoundError):
+       env_paths = [p for p in ROOT.rglob(".env*") if ".git" not in p.parts]
    for path in env_paths:
         if path.name != ".env.example":
             errors.append(
