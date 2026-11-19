@@ -104,7 +104,7 @@ def check_yaml_and_sha_pinning(errors: list[str]) -> None:
     except ImportError:
         yaml = None
 
-    yaml_files = list((ROOT / ".github").rglob("*.yml")) + [
+    yaml_files = list((ROOT / ".github").rglob("*.yml")) + list((ROOT / ".github").rglob("*.yaml")) + [
         ROOT / ".pre-commit-config.yaml",
     ]
     for path in yaml_files:
@@ -147,9 +147,12 @@ def check_env_and_gitignore(errors: list[str]) -> None:
         if required not in gi_lines:
             errors.append(f"[12-FACTOR] .gitignore missing required entry: {required}")
 
-    for path in ROOT.rglob(".env*"):
-        if ".git" in path.parts:
-            continue
+   try:
+       tracked = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
+       env_paths = [ROOT / p for p in tracked if Path(p).name.startswith(".env")]
+   except (subprocess.CalledProcessError, FileNotFoundError):
+       env_paths = [p for p in ROOT.rglob(".env*") if ".git" not in p.parts]
+   for path in env_paths:
         if path.name != ".env.example":
             errors.append(
                 f"[SECRETS] Real env file must not exist in repo: {path.relative_to(ROOT)}"
@@ -238,7 +241,8 @@ def check_codeowners(errors: list[str]) -> None:
         errors.append("[CODEOWNERS] Missing CODEOWNERS file")
         return
     co_text = co_path.read_text(encoding="utf-8")
-    required_patterns = (
+   co_patterns = {line.split()[0].lstrip("/") for line in co_text.splitlines() if line.strip() and not line.lstrip().startswith("#")}
+required_patterns = (
         "docs/ai/**",
         "AGENTS.md",
         "CLAUDE.md",
@@ -248,7 +252,7 @@ def check_codeowners(errors: list[str]) -> None:
         ".github/workflows/**",
     )
     for pattern in required_patterns:
-        if pattern not in co_text:
+        if pattern not in co_patterns:
             errors.append(f"[CODEOWNERS] Missing protection rule for '{pattern}'")
 
 
@@ -282,9 +286,13 @@ def check_git_diff_ratchets(diff_base: str, errors: list[str]) -> None:
             text=True,
             stderr=subprocess.DEVNULL,
         )
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    
+    except subprocess.CalledProcessError as exc:
+        errors.append(f"[GIT-DIFF] Failed to diff against '{diff_base}': {exc}")
         return
-
+    except FileNotFoundError:
+        return
+        
     current_file = ""
     for line in diff_out.splitlines():
         if line.startswith("+++ b/"):
