@@ -242,7 +242,7 @@ def check_codeowners(errors: list[str]) -> None:
         return
     co_text = co_path.read_text(encoding="utf-8")
    co_patterns = {line.split()[0].lstrip("/") for line in co_text.splitlines() if line.strip() and not line.lstrip().startswith("#")}
-required_patterns = (
+    required_patterns = (
         "docs/ai/**",
         "AGENTS.md",
         "CLAUDE.md",
@@ -305,9 +305,9 @@ def check_git_diff_ratchets(diff_base: str, errors: list[str]) -> None:
             continue
         if SUPPRESSION_RE.search(added) and not SUPPRESSION_JUSTIFIED_RE.search(added):
             errors.append(
-                f"[SUPPRESSION] Unjustified linter/SAST suppression in {current_file}: "
-                "append '-- <brief reason>' to explain why"
-            )
+                  f"[SUPPRESSION] Unjustified linter/SAST suppression in {current_file}: "
+                  "append '-- <brief reason>' to explain why"
+          )
 
     try:
         numstat = subprocess.check_output(
