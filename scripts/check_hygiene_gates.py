@@ -241,7 +241,11 @@ def check_codeowners(errors: list[str]) -> None:
         errors.append("[CODEOWNERS] Missing CODEOWNERS file")
         return
     co_text = co_path.read_text(encoding="utf-8")
-     co_patterns = {line.split()[0].lstrip("/") for line in co_text.splitlines() if line.strip() and not line.lstrip().startswith("#")}
+     co_patterns = {
+         line.split()[0].lstrip("/")
+         for line in co_text.splitlines()
+         if line.strip() and not line.lstrip().startswith("#")
+     }
     required_patterns = (
         "docs/ai/**",
         "AGENTS.md",
