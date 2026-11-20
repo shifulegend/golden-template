@@ -152,7 +152,7 @@ def check_env_and_gitignore(errors: list[str]) -> None:
        env_paths = [ROOT / p for p in tracked if Path(p).name.startswith(".env")]
     except (subprocess.CalledProcessError, FileNotFoundError):
         env_paths = [p for p in ROOT.rglob(".env*") if ".git" not in p.parts]
-   for path in env_paths:
+    for path in env_paths:
         if path.name != ".env.example":
             errors.append(
                 f"[SECRETS] Real env file must not exist in repo: {path.relative_to(ROOT)}"
