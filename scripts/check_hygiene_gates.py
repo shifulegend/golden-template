@@ -238,14 +238,14 @@ def check_codeowners(errors: list[str]) -> None:
     """Verify CODEOWNERS protects all canonical AI instruction & CI paths."""
     co_path = ROOT / "CODEOWNERS"
     if not co_path.exists():
-        errors.append("[CODEOWNERS] Missing CODEOWNERS file")
+    errors.append("[CODEOWNERS] Missing CODEOWNERS file")
         return
-    co_text = co_path.read_text(encoding="utf-8")
-     co_patterns = {
-         line.split()[0].lstrip("/")
-         for line in co_text.splitlines()
-         if line.strip() and not line.lstrip().startswith("#")
-     }
+co_text = co_path.read_text(encoding="utf-8")
+    co_patterns = {
+        line.split()[0].lstrip("/")
+        for line in co_text.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
     required_patterns = (
         "docs/ai/**",
         "AGENTS.md",
@@ -258,7 +258,6 @@ def check_codeowners(errors: list[str]) -> None:
     for pattern in required_patterns:
         if pattern not in co_patterns:
             errors.append(f"[CODEOWNERS] Missing protection rule for '{pattern}'")
-
 
 def check_markdown_fences(errors: list[str]) -> None:
     """Enforce explicit language tags on fenced code blocks (Control 3.4.3 / MD040)."""
