@@ -1,0 +1,47 @@
+# Security & Supply-Chain Hygiene — Controls 6.2, 6.3, 6.5 (OWASP CICD-SEC-6 & A03:2025)
+# All third-party actions pinned to full 40-character commit SHAs.
+
+name: Security Hygiene
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  secrets-scan:
+    name: Secrets Scan (Gitleaks Full History)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sast-and-supply-chain:
+    name: SAST · SCA · SBOM Checklist Stub
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: SAST, SCA & SBOM activation reminder
+        run: |
+          echo "Enable stack-specific SHA-pinned scanners when code is added:"
+          echo "  1. SAST (SARIF): CodeQL / Semgrep (block Critical/High)"
+          echo "  2. SCA & Licenses: Trivy / OSV-Scanner / Dependency-Track"
+          echo "  3. SBOM & Provenance: Syft (CycloneDX) + actions/attest-build-provenance"
+          echo "  4. Workflow Audit: zizmor / actionlint / OpenSSF Scorecard"

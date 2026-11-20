@@ -1,45 +1,16 @@
-# Claude Code — Project Memory
-<!-- DYNAMIC FILE — updated automatically by Claude as durable lessons emerge -->
-<!-- Last updated: TIMESTAMP -->
+# Claude Code — Project Instructions
+<!-- Last updated: 2026-11-19 IST · Target: <200 lines per code.claude.com/docs/en/memory -->
 
-## Session Start (Mandatory)
-Before planning or coding in any session:
-1. Read `docs/ai/project-overview.md`
-2. Read `docs/ai/engineering-rules.md`
-3. Read `docs/ai/mistakes.md` — summarize relevant recent mistakes
-4. Read `docs/ai/decision-log.md` — summarize relevant recent decisions
-5. Read relevant `.claude/rules/*.md` for the area being changed
-6. State assumptions, open risks, and relevant rules before any action
+@AGENTS.md
 
-## Project Context
-<!-- Summarized from docs/ai/project-overview.md — keep in sync -->
+## Project Context (Keep in sync with `docs/ai/project-overview.md`)
 - **Purpose**: TODO
 - **Stack**: TODO
-- **Architecture**: TODO
-- **Key directories**: TODO
-- **Commands**: TODO (setup, dev, test, lint, typecheck, build, run)
+- **Commands**: `python3 scripts/check_hygiene_gates.py` (hygiene gates); TODO (dev, lint, typecheck, test, build)
 
-## Core Rules
-- Smallest sensible modular unit per responsibility
-- Zero hard-coding — all behavior configurable
-- Documentation mandatory and timestamped
-- Granular commits: what + why
-- Verify: lint → typecheck → test → build
-- See `.claude/rules/` for detailed scoped rules
-
-## Dynamic Update Requirement
-Proactively update these files every session without waiting for user prompts:
-- `docs/ai/mistakes.md` — on any mistake
-- `docs/ai/decision-log.md` — on any durable decision
-- `docs/ai/change-trace.md` — after each sub-step
-- `CLAUDE.md` — when repo-wide rules change
-- `.claude/rules/*.md` — when scoped rules change
-
-## README Standard
-Follow `docs/ai/readme-guidance.md` whenever `README.md` is created or changed: inverted-pyramid order (one-line pitch, badges and hero visual first; quickstart; install; configuration; deep dive), the archetype table, accessibility rules, and the pre-commit checklist. Start new READMEs from `docs/README.template.md`.
-
-## Context & Token Efficiency
-Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
-
-## Canonical Source
-All rules originate in `docs/ai/`. If this file conflicts with `docs/ai/`, the shared docs win.
+## Claude Code Native Governance (Official Spec)
+- **Deterministic Enforcement (`.claude/settings.json`):** Hard blocks on reading/editing `.env` and secret files (`permissions.deny`) plus lifecycle hooks — never rely on prose alone for zero-exception rules.
+- **Path-Scoped Rules (`.claude/rules/*.md`):** Loaded automatically via YAML `paths:` frontmatter when touching matching files (`core.md`, `config.md`, `docs.md`, `tests.md`).
+- **On-Demand Skills (`.claude/skills/*/SKILL.md`):** Invoked via `/session-start`, `/implement-task`, `/review-and-verify`, `/project-memory`.
+- **Independent Read-Only Auditor (`.claude/agents/hygiene-reviewer.md`):** Delegate diff audits to `hygiene-reviewer` so the writing session never grades its own homework.
+- **Personal Overrides:** Put local preferences in gitignored `CLAUDE.local.md` or `.claude/settings.local.json`.

@@ -1,44 +1,21 @@
 # GitHub Copilot — Repository Instructions
-<!-- DYNAMIC FILE — updated automatically by Copilot as durable lessons emerge -->
-<!-- Last updated: TIMESTAMP -->
+<!-- Last updated: 2026-11-19 IST -->
+<!-- Canonical source: docs/ai/ and AGENTS.md — if conflict exists, docs/ai/ wins -->
 
 ## Session Start (Mandatory)
-Before planning or coding in any session:
-1. Read `docs/ai/project-overview.md`
-2. Read `docs/ai/engineering-rules.md`
-3. Read `docs/ai/mistakes.md` — summarize relevant recent mistakes
-4. Read `docs/ai/decision-log.md` — summarize relevant recent decisions
-5. Read relevant `.github/instructions/*.instructions.md` for the area being changed
-6. State assumptions, open risks, and relevant rules before any action
+1. Read `AGENTS.md`, `docs/ai/project-overview.md`, `docs/ai/engineering-rules.md`, `docs/ai/mistakes.md`, and `docs/ai/decision-log.md`.
+2. Read relevant `.github/instructions/*.instructions.md` for the area being changed.
+3. State assumptions, open risks, and relevant rules before editing.
 
-## Project Context
-<!-- Summarized from docs/ai/project-overview.md — keep in sync -->
-- **Purpose**: TODO
-- **Stack**: TODO
-- **Architecture**: TODO
-- **Key directories**: TODO
+## Core Semantic Hygiene Rules (Synced with `AGENTS.md`)
+- DRY (search existing helpers before creating new ones); never append features to files >500 LOC.
+- KISS & YAGNI (no nested ternaries, no speculative abstractions, <=20-line atomic functions).
+- Least Astonishment (pure `get*`/`calc*`/`is*` helpers have zero side effects) & Curly's Law.
+- SOLID boundaries, zero hard-coding, specific error boundaries (zero `except: pass`), structured PII-free logging, strict schemas, and explicit outbound timeouts/retries.
+- Comments explain *why*, never *what*; delete dead code; tag all Markdown code fences (MD040).
+- Never weaken test assertions and never auto-write the human PR Architecture & Mental-Model Summary.
 
-## Core Rules (from docs/ai/engineering-rules.md)
-- Develop to the smallest sensible modular unit
-- Zero hard-coding — all behavior must be configurable
-- Documentation is mandatory and must be timestamped
-- Every change needs granular commits explaining what + why
-- Verify with tests, lint, typecheck, build before claiming done
-
-## Dynamic Update Requirement
-You MUST proactively update these files every session without waiting for user prompts:
-- `docs/ai/mistakes.md` — on any mistake
-- `docs/ai/decision-log.md` — on any durable decision
-- `docs/ai/change-trace.md` — after each sub-step
-- `.github/copilot-instructions.md` — when repo-wide rules change
-- `.github/instructions/*.instructions.md` — when scoped rules change
-- `.github/prompts/*.prompt.md` — when workflows improve
-
-## README Standard
-Follow `docs/ai/readme-guidance.md` whenever `README.md` is created or changed: inverted-pyramid order (one-line pitch, badges and hero visual first; quickstart; install; configuration; deep dive), the archetype table, accessibility rules, and the pre-commit checklist. Start new READMEs from `docs/README.template.md`.
-
-## Context & Token Efficiency
-Read `docs/ai/context-efficiency.md` — use ripgrep/ast-grep for code search (never speculative file reads), consult `docs/ai/repo-map.md` for orientation, compress tool/log output before carrying it into context, and keep static canonical content front-loaded for prompt-cache efficiency.
-
-## Canonical Source
-All rules originate in `docs/ai/`. If this file conflicts with `docs/ai/`, the shared docs win.
+## Verification & Dynamic Updates
+- Verify: `python3 scripts/check_hygiene_gates.py` → lint → strict typecheck → test → build.
+- Update `docs/ai/mistakes.md`, `docs/ai/decision-log.md`, and `docs/ai/change-trace.md` proactively every session.
+- Follow `docs/ai/readme-guidance.md` for `README.md` and `docs/ai/context-efficiency.md` for code search.

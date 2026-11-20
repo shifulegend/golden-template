@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|multi_replace_file_content",
+        "command": "python3 -c \"import json,sys; p=json.load(sys.stdin).get('tool_input',{}).get('TargetFile',''); blocked=any(tok in p for tok in ('.env','.pem','.key','secrets/')) and not p.endswith('.env.example'); sys.exit(2 if blocked else 0)\"",
+        "description": "Block writes to .env, private keys, or secrets directories (Control 4.2 & 6.3)"
+      },
+      {
+        "matcher": "run_command",
+        "command": "python3 -c \"import json,sys; c=json.load(sys.stdin).get('tool_input',{}).get('CommandLine',''); sys.exit(0 if 'git push' not in c else 1)\" || python3 scripts/check_hygiene_gates.py",
+        "description": "Run deterministic code hygiene & canonical AI doc gates before git push"
+      }
+    ]
+  }
+}

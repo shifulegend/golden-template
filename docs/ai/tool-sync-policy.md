@@ -1,34 +1,22 @@
 # Tool Sync Policy
-<!-- DYNAMIC FILE — update when sync rules improve -->
+<!-- Last updated: 2026-11-19 IST -->
+<!-- DYNAMIC FILE — verified deterministically by scripts/check_hygiene_gates.py -->
 
 ## Canonical Source of Truth
-`docs/ai/**` is the primary source of truth for all project memory, rules, and decisions.
+`docs/ai/**` is the primary source of truth for project memory, rules, and decisions. `AGENTS.md` is the concise (<200 lines) cross-tool entrypoint shared across Claude Code, Google Antigravity, and other agents.
 
-## Adapter Files (Synchronized from docs/ai/)
-| Tool           | Adapter Files |
-|----------------|--------------|
-| GitHub Copilot | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, `.github/prompts/*.prompt.md` |
-| Claude Code    | `CLAUDE.md`, `.claude/rules/*.md`, `.claude/skills/**/SKILL.md` |
-| Antigravity    | `gemini/GEMINI.md`, `AGENTS.md`, `.agents/rules/*.md`, `.agents/workflows/*.md` |
+## Official Adapter Layout (Validated by CI)
+| Tool | Entrypoint | Scoped Rules | Skills / Prompts | Read-Only Reviewer | Deterministic Guardrails |
+| --- | --- | --- | --- | --- | --- |
+| **Claude Code** | `CLAUDE.md` (imports `@AGENTS.md`) | `.claude/rules/*.md` (YAML `paths:`) | `.claude/skills/*/SKILL.md` | `.claude/agents/hygiene-reviewer.md` | `.claude/settings.json` (`permissions.deny` + hooks) |
+| **Google Antigravity** | `GEMINI.md` + `AGENTS.md` (+ `gemini/GEMINI.md` mirror) | `.agents/rules/*.md` (YAML `trigger:`) | `.agents/skills/*/SKILL.md` | `.agents/agents/hygiene-reviewer.md` | `.agents/hooks.json` (`PreToolUse`) |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `.github/instructions/*.instructions.md` | `.github/prompts/*.prompt.md` | `.github/prompts/review-changes.prompt.md` | `.github/workflows/ci.yml` |
 
 ## Sync Rules
 1. Update shared `docs/ai/` files FIRST.
-2. Then synchronize relevant tool-specific adapter files.
-3. Record the change in `docs/ai/change-trace.md`.
-4. Propose a commit checkpoint.
-
-## When Adapter Files Must Be Updated
-- When a durable repo-wide rule is added or changed → update all tool entrypoint files
-- When a scoped rule changes → update the relevant scoped files for each tool
-- When a workflow improves → update the relevant prompt/skill/workflow file
-- When a mistake produces a prevention rule → update rules + entrypoints
+2. Update `AGENTS.md` if a repo-wide rule changes (keep under 200 lines).
+3. Sync tool-specific rules, skills, and hooks; run `python3 scripts/check_hygiene_gates.py`.
+4. Record the change in `docs/ai/change-trace.md` and propose a commit checkpoint.
 
 ## Conflict Resolution
-If a conflict exists between a tool-specific file and `docs/ai/`, the shared doc wins.
-Update the tool-specific file to match, and log the correction in `docs/ai/change-trace.md`.
-
-## README Standard
-`docs/ai/readme-guidance.md` is the canonical README rulebook (condensed from `shifulegend/readme-guidance`). Entrypoints carry a one-paragraph pointer and the docs rules carry a one-line bullet; neither restates it.
-
-## Context & Token Efficiency
-`docs/ai/context-efficiency.md` defines token-minimization rules: structural code search (ripgrep/ast-grep over speculative file reads), a maintained `docs/ai/repo-map.md` for instant orientation, tool/log output compression before it enters context, and static-first prompt ordering for cache efficiency. All tool entrypoints reference this file rather than restating it — see `.github/copilot-instructions.md`, `CLAUDE.md`, `gemini/GEMINI.md`, `AGENTS.md`.
+If any tool-specific file conflicts with `docs/ai/`, `docs/ai/` wins. All canonical AI files are protected by `CODEOWNERS`.

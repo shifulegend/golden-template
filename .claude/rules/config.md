@@ -1,10 +1,15 @@
-# Config & Settings Rules
-<!-- DYNAMIC FILE -->
-<!-- paths: config/**, *.config.*, *.env*, schemas/**, settings/** -->
+---
+paths:
+  - "config/**"
+  - "*.config.*"
+  - ".env*"
+  - "schemas/**"
+  - "settings/**"
+---
+# Config, Secrets & Schema Rules
 
-- Zero hard-coded values anywhere.
-- Environment-specific values in env vars or config files.
-- All configs must have safe, documented defaults.
-- Config schemas validated at startup.
-- New config keys documented in config files and `docs/ai/engineering-rules.md`.
-- Feature flags must be config-driven.
+- Zero hard-coded environment values or secrets anywhere; externalize via env vars or secret managers (12-Factor).
+- Only `.env.example` may be committed; keep `.env` in `.gitignore` and blocked in `.claude/settings.json`.
+- Validate all config and external API inputs against strict schemas (Zod/Pydantic/JSON Schema) at startup/boundary.
+- Document safe defaults for every config key in `.env.example` and `docs/ai/engineering-rules.md`.
+- Enforce explicit timeouts and bounded retries on all outbound HTTP/DB client configurations.

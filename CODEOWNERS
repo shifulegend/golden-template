@@ -1,11 +1,28 @@
-# CODEOWNERS
-# Auto-request @shifulegend for review on all changes.
+# CODEOWNERS — Controls 5.3 (Specialist Escalation) & 7.2.1 (AI Rule Protection)
 # Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-*                             @shifulegend
-docs/ai/**                    @shifulegend
-.github/copilot-instructions.md  @shifulegend
-CLAUDE.md                     @shifulegend
-AGENTS.md                     @shifulegend
-gemini/GEMINI.md              @shifulegend
-.github/workflows/**          @shifulegend
+*                                   @shifulegend
+
+# Canonical AI instructions, hooks, rules, skills & subagents (anti-backdoor protection)
+docs/ai/**                          @shifulegend
+AGENTS.md                           @shifulegend
+CLAUDE.md                           @shifulegend
+GEMINI.md                           @shifulegend
+gemini/GEMINI.md                    @shifulegend
+.claude/**                          @shifulegend
+.agents/**                          @shifulegend
+.github/copilot-instructions.md     @shifulegend
+.github/instructions/**             @shifulegend
+.github/prompts/**                  @shifulegend
+
+# CI/CD, supply-chain & security posture
+.github/workflows/**                @shifulegend
+.github/dependabot.yml              @shifulegend
+.pre-commit-config.yaml             @shifulegend
+SECURITY.md                         @shifulegend
+scripts/**                          @shifulegend
+
+# Specialist escalation paths (uncomment/assign domain owners as team grows)
+# **/auth/**                        @shifulegend
+# **/security/**                    @shifulegend
+# **/migrations/**                  @shifulegend
